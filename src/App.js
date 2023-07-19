@@ -10,8 +10,23 @@ REQUISITOS
 */
 
 import React from "react";
-
+import {Routes, Route } from 'react-router-dom'
+//Importando componentes
+import Home from './components/Home/Home'
+import Nav from './components/Nav/Nav';
+import CelularDetail from './components/CelularDetail/CelularDetail'
+import CreateCelular from './components/CreateCelular/CreateCelular';
 const App = () => {
-  return <div></div>;
+  return(
+    <div>
+         <Nav />
+         <Routes>
+            <Route path= "/" element= {<Home/>} />
+            <Route path= "/celulares/:id" element={<CelularDetail />} />
+            <Route path= "/celulares/create" element= {<CreateCelular />} />         
+         </Routes>
+         
+      </div>
+   );
 };
 export default App;

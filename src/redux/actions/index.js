@@ -4,6 +4,7 @@
 // Por ejemplo:
 // return axios(...)...
 // return fetch(...)...
+//import axios from 'axios'
 
 export const GET_ALL_CELULARES = "GET_ALL_CELULARES";
 export const GET_CELULARES_DETAIL = "GET_CELULARES_DETAIL";
@@ -13,13 +14,33 @@ export const DELETE_CELULAR = "DELETE_CELULAR";
 // 🟢 getAllCelulares:
 // Esta función debe realizar una petición al Back-End. Luego despachar una action con la data recibida.
 // End-Point: 'http://localhost:3001/celulares'.
-export const getAllCelulares = () => {};
+export const getAllCelulares = () => {
+    return function (dispatch) {
+    return fetch(`http://localhost:3001/celulares`)
+    .then(response => response.json())
+    .then( (data)  =>  dispatch({ type: GET_ALL_CELULARES, payload: data }));  
+    }
+};
+
+/* export const getAllCelulares = () => {
+    return function (dispatch) {
+        axios(`http://localhost:3001/celulares`)
+        .then(data => dispatch( { type: GET_ALL_CELULARES, payload: data.data}));
+    }
+} */
 
 // 🟢 getCelularesDetails:
 // Esta función debe hacer una petición al Back-End. Ten en cuenta que tiene que recibir la variable "id" por
 // parámetro. Luego despachar una action con la data recibida.
 // End-Point: 'http://localhost:3001/celulares/:id'.
-export const getCelularDetails = (id) => {};
+export const getCelularDetails = (id) => {
+    return function (dispatch) {
+    return fetch(`http://localhost:3001/celulares:/${id}`)
+    .then(response => response.json())
+    .then((data ) => dispatch({ type: GET_CELULARES_DETAIL, payload: data }))
+
+    }
+};
 
 // 🟢 createCelular:
 // Esta función debe recibir una variable "celulares" por parámetro.
@@ -27,9 +48,13 @@ export const getCelularDetails = (id) => {};
 //    - haga un spread operator de la variable celulares, para copiar todo su contenido.
 //    - tenga una nueva propiedad "id" igual a la variable de abajo, pero con un incremento +1.
 // Descomenta esta variable cuando la necesites.
-// let id = 6;
-export const createCelular = (payload) => {};
+let id = 6;
+export const createCelular = (payload) => {
+    return {type: CREATE_CELULAR, payload: {...payload, id: id ++}}
+};
 
 // 🟢 deleteCelular:
 // Esta función debe retornar una action. En su propiedad "payload" guardarás el ID recibido por parámetro.
-export const deleteCelular = (payload) => {};
+export const deleteCelular = (payload) => {
+    return {type: DELETE_CELULAR, payload: payload}
+};
