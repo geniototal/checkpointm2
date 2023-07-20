@@ -18,12 +18,13 @@ import "./home.css";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import CelularCard from "../CelularCard/CelularCard";
-import { getAllCelulares } from '../../redux/actions/index'
+import * as actions from '../../redux/actions'
+import imagen from "../../img-cp2/main-image-cp2.jpg"
 
-class Home extends React.Component {
-  constructor (props) {
+export class Home extends Component {
+  /* constructor (props) {
     super(props);
-  }
+  } */
   componentDidMount () {
     this.props.getAllCelulares();
   }
@@ -31,12 +32,11 @@ class Home extends React.Component {
   render() {
     return <div className="home">
       <h1>Cellphones</h1>
-      {/* <img src= "../../img-cp2/main-image-cp2.jpg" alt="celular-logo" /> */}
+      <img src= {imagen} alt="celular-logo" />
       <h3>Celulares:</h3>
-      {console.log(this.props.celulares)}
       <h4>Checkpoint M2</h4>
-      <div>
-        {this.props.celulares.map((celu) => {
+      
+        {this.props.celulares?.map((celu) => {
           return <CelularCard 
           key = {celu.id}
           id = {celu.id}
@@ -46,7 +46,7 @@ class Home extends React.Component {
           modelo = {celu.modelo}
            />
         })}
-      </div>
+      
     </div>;
   }
 }
@@ -60,7 +60,7 @@ export const mapStateToProps = (state) => {
 export const mapDispatchToProps = (dispatch) => {
   return {
     getAllCelulares: () => {
-      dispatch(getAllCelulares());
+      dispatch(actions.getAllCelulares());
     }
   }
 };

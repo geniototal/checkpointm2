@@ -11,18 +11,23 @@ IMPORTANTE
 ❗Este componente debe ser FUNCIONAL.
 ❗Importar las actions como Object Modules, ¡sino los test no funcionarán!
 */
-
+import { Link } from "react-router-dom";
 import "./celularCard.css";
 import React from "react";
+import * as actions from "../../redux/actions";
+import {useDispatch} from "react-redux";
 
 const CelularCard = (props) => {
+  const dispatch = useDispatch();
+  const onClose = (id) => {
+    dispatch(actions.deleteCelular(id))
+  }
   return <div className="card">
-    <h2>{props.id}</h2>
-    <h2>{props.marca}</h2>
-    <h2>{props.modelo}</h2>
-    <img src= {props.imagen}alt={props.marca} />
-
-    <h2>{props.precio}</h2>
+    <button onClick={()=> onClose(props.id)}>x</button>
+    <Link to={`/celulares/${props.id}`}><h3>{props.modelo}</h3></Link>
+    <img src= {props.imagen}alt={props.modelo} />
+    <p>Marca: {props.marca}</p>
+    <h4>Precio: ${props.precio} USD</h4>
   </div>;
 };
 
