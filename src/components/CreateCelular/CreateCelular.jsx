@@ -50,6 +50,7 @@ const CreateCelular = () => {
     precio: "",
 })
   const dispatch = useDispatch();
+  
   const handleChange = (event) => {
     const property = event.target.name;
     const valor = event.target.value;
@@ -69,13 +70,13 @@ const handleSubmit = (event) => {
     <form onSubmit = {handleSubmit}>
       <label htmlFor="marca">Marca: </label>
       <input type="text" name= "marca" onChange= {handleChange}/>
-      <p>{errors.marca}</p>
+      {errors.marca && <p>{errors.marca}</p>}
       <label htmlFor="modelo">Modelo: </label>
       <input type="text" name= "modelo" onChange= {handleChange}/>
-      <p>{errors.modelo}</p>
+      {errors.modelo && <p>{errors.modelo}</p>}
       <label htmlFor="precio">Precio: </label>
       <input type="number" name= "precio" onChange= {handleChange}/>
-      <p>{errors.precio}</p>
+      {errors.precio && <p>{errors.precio}</p>}
       <label htmlFor="descripcion">Descripción: </label>
       <textarea name= "descripción" onChange= {handleChange}></textarea>
       <label htmlFor="sistema">Sistema Operativo: </label>
